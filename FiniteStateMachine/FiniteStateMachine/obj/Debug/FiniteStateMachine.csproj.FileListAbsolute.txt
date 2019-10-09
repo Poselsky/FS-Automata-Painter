@@ -1,0 +1,7 @@
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.csprojAssemblyReference.cache
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.csproj.CoreCompileInputs.cache
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\bin\Debug\FiniteStateMachine.exe.config
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\bin\Debug\FiniteStateMachine.exe
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\bin\Debug\FiniteStateMachine.pdb
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.exe
+C:\Users\olegm\OneDrive\Plocha\FiniteStateMachine\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.pdb
