@@ -1,2 +1,2 @@
-# FS-Automata-Painter
-This project creates images with finite state machine/automata
+# Finite-State-Automata-API
+Finite state machines are great. This repository creates API for reusability of Finite State Machines. Right now C# only
