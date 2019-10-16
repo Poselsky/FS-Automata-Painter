@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace FiniteStateMachine
 {
-    interface IFinalState<T>:IState<T>
+    public abstract class AFinalState<T> : AState<T>
     {
-        bool ReturnIf(Predicate<T> predicate, T predicateInput);
+
+        public abstract bool ReturnIf(Predicate<T> predicate, T predicateInput);
     }
 }

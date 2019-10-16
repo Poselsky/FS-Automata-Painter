@@ -8,14 +8,14 @@ namespace FiniteStateMachine
 {
     class Sigma<T>
     {
-        public Dictionary<int, Dictionary<T, IState<T>>> changeToOtherStateTable { get; private set;}
+        public Dictionary<int, Dictionary<T, AState<T>>> changeToOtherStateTable { get; private set;}
 
-        public Sigma(Dictionary<int, Dictionary<T, IState<T>>> changeToOtherStateTable)
+        public Sigma(Dictionary<int, Dictionary<T, AState<T>>> changeToOtherStateTable)
         {
             this.changeToOtherStateTable = changeToOtherStateTable;
         }
 
-        public IState<T> ChangeStateFunction(int StateID, T input)
+        public AState<T> ChangeStateFunction(int StateID, T input)
         {
             if (ContainsKeys(StateID, input))
             {
@@ -27,12 +27,12 @@ namespace FiniteStateMachine
 
 
         }
-        public virtual void AddFunctionToTable(int StateID, Dictionary<T, IState<T>> dictionaryOfStates)
+        public virtual void AddFunctionToTable(int StateID, Dictionary<T, AState<T>> dictionaryOfStates)
         {
             this.changeToOtherStateTable[StateID] = dictionaryOfStates;
         }
 
-        public virtual void AddFunctionToTable(int StateID, T input, IState<T> state)
+        public virtual void AddFunctionToTable(int StateID, T input, AState<T> state)
         {
             if (ContainsKeys(StateID, input))
             {
@@ -46,7 +46,7 @@ namespace FiniteStateMachine
                 }
                 else
                 {
-                    changeToOtherStateTable[StateID] = new Dictionary<T, IState<T>>();
+                    changeToOtherStateTable[StateID] = new Dictionary<T, AState<T>>();
                     changeToOtherStateTable[StateID][input] = state;
                 }
             

@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace FiniteStateMachine
 {
-    public class FinalState<T> : BasicState<T>, IFinalState<T>
+    public class FinalState<T> : AFinalState<T>
     {
         public FinalState():base()
         {
 
         }
 
-        public bool ReturnIf(Predicate<T> predicate, T predicateInput)
+        public override T Reaction(Func<T, T> action, T funcParameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool ReturnIf(Predicate<T> predicate, T predicateInput)
         {
             return predicate(predicateInput);
         }
