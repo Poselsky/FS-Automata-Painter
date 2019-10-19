@@ -15,39 +15,38 @@ namespace FiniteStateMachine
             this.changeToOtherStateTable = changeToOtherStateTable;
         }
 
-        public AState<T> ChangeStateFunction(int StateID, T input)
+        public AState<T> ChangeStateFunction(int stateID, T input)
         {
-            if (ContainsKeys(StateID, input))
+            if (ContainsKeys(stateID, input))
             {
-                return changeToOtherStateTable[StateID][input];
+                return changeToOtherStateTable[stateID][input];
             }else
             {
                 throw new Exception("Your function is not listed in Function Table!");
             }
-
-
         }
-        public virtual void AddFunctionToTable(int StateID, Dictionary<T, AState<T>> dictionaryOfStates)
+        
+        public virtual void AddFunctionToTable(int stateID, Dictionary<T, AState<T>> dictionaryOfStates)
         {
-            this.changeToOtherStateTable[StateID] = dictionaryOfStates;
+            this.changeToOtherStateTable[stateID] = dictionaryOfStates;
         }
 
-        public virtual void AddFunctionToTable(int StateID, T input, AState<T> state)
+        public virtual void AddFunctionToTable(int stateId, T input, AState<T> state)
         {
-            if (ContainsKeys(StateID, input))
+            if (ContainsKeys(stateId, input))
             {
-                changeToOtherStateTable[StateID][input] = state;
+                changeToOtherStateTable[stateId][input] = state;
             }
             else
             {
-                if (changeToOtherStateTable.ContainsKey(StateID))
+                if (changeToOtherStateTable.ContainsKey(stateId))
                 {
-                    changeToOtherStateTable[StateID][input] = state;
+                    changeToOtherStateTable[stateId].Add(input, state);
                 }
                 else
                 {
-                    changeToOtherStateTable[StateID] = new Dictionary<T, AState<T>>();
-                    changeToOtherStateTable[StateID][input] = state;
+                    changeToOtherStateTable[stateId] = new Dictionary<T, AState<T>>();
+                    changeToOtherStateTable[stateId].Add(input, state);
                 }
             
             }

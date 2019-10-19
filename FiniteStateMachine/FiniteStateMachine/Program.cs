@@ -43,7 +43,7 @@ namespace MainProgram
 
 
 
-            List<int> inputs = new List<int>() { 0, 1, 1, 1, 0, 0, 1, 0, 0, 0};
+            List<int> inputs = new List<int>() { 0, 1, 1, 0, 1, 1, 0, 1, 1, 0};
 
 
             int sum = 0;

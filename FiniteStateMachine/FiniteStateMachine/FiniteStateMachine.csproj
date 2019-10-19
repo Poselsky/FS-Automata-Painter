@@ -49,6 +49,7 @@
     <Compile Include="FiniteStateMachine\State\BasicState.cs" />
     <Compile Include="FiniteStateMachine\State\FinalState.cs" />
     <Compile Include="FiniteStateMachine\State\IFinalState.cs" />
+    <Compile Include="FiniteStateMachine\State\AState.cs" />
     <Compile Include="FiniteStateMachine\State\IState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
