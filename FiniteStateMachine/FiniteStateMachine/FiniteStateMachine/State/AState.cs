@@ -24,5 +24,10 @@ namespace FiniteStateMachine
         }
 
         public abstract T Reaction(Func<T, T> action, T funcParameter);
+
+        public override string ToString()
+        {
+            return this.ID.ToString();
+        }
     }
 }

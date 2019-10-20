@@ -39,11 +39,19 @@ namespace MainProgram
             table[final.ID].Add(0, state);
             table[final.ID].Add(1, null);
 
+            //TWO Different ways how to write change to other state table
+            /*
+            Sigma<int> sigma = new Sigma<int>();
+            sigma.AddFunctionToTable(state.ID, 0, state)
+                .AddFunctionToTable(state.ID, 1, state2)
+                .AddFunctionToTable(state2.ID, 0, state)
+                .AddFunctionToTable(state2.ID, 1, final)
+                .AddFunctionToTable(final.ID, 0, state)
+                .AddFunctionToTable(final.ID, 1, null);
+            */
             Sigma<int> sigma = new Sigma<int>(table);
-
-
-
-            List<int> inputs = new List<int>() { 0, 1, 1, 0, 1, 1, 0, 1, 1, 0};
+            
+            List<int> inputs = new List<int>() { 0, 1, 1, 0, 1, 1, 1, 1, 1, 1};
 
 
             int sum = 0;
