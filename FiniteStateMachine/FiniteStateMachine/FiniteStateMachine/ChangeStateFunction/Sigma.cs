@@ -38,27 +38,32 @@ namespace FiniteStateMachine
             return this;
         }
 
-        public Sigma<T> AddFunctionToTable(int stateId, T input, AState<T> destinationState)
+        public Sigma<T> AddFunctionToTable(int stateID, T input, AState<T> destinationState)
         {
-            if (ContainsKeys(stateId, input))
+            if (ContainsKeys(stateID, input))
             {
-                changeToOtherStateTable[stateId][input] = destinationState;
+                changeToOtherStateTable[stateID][input] = destinationState;
             }
             else
             {
-                if (changeToOtherStateTable.ContainsKey(stateId))
+                if (changeToOtherStateTable.ContainsKey(stateID))
                 {
-                    changeToOtherStateTable[stateId].Add(input, destinationState);
+                    changeToOtherStateTable[stateID].Add(input, destinationState);
                 }
                 else
                 {
-                    changeToOtherStateTable[stateId] = new Dictionary<T, AState<T>>();
-                    changeToOtherStateTable[stateId].Add(input, destinationState);
+                    changeToOtherStateTable[stateID] = new Dictionary<T, AState<T>>();
+                    changeToOtherStateTable[stateID].Add(input, destinationState);
                 }
             
             }
             return this;
         }
+        public Sigma<T> AddFunctionToTable(AState<T> startState, T input, AState<T> destinationState)
+        {
+            return AddFunctionToTable(startState.ID, input, destinationState);
+        }
+
 
         public Sigma<T> AddFunctionToTable(string stateToState, T input, AState<T> destinationState)
         {
@@ -80,12 +85,16 @@ namespace FiniteStateMachine
             return this;
         }
 
-        public Sigma<T> AddFunctionToTable(AState<T> fromState, AState<T> destinationState, T input)
+        public Sigma<T> AddTwoWayFunctionToTable(AState<T> stateA, T input, AState<T> stateB)
         {
             // stateID<->stateID -- two way
+            if(stateA == stateB)
+            {
+                throw new ArgumentException("Objects provided in parameter are identical. Please choose two seperate objects for two way binding.");
+            }
 
-            AddFunctionToTable(fromState.ID, input, destinationState);
-            AddFunctionToTable(destinationState.ID, input, fromState);
+            AddFunctionToTable(stateA.ID, input, stateB);
+            AddFunctionToTable(stateB.ID, input, stateA);
 
             return this;
         }

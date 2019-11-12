@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FiniteStateMachine
 {
-    public abstract class AState<T> : IState<T>
+    public abstract class AState<T> : IState<T>, IComparable<AState<T>>
     {
         public int ID { get; private set; }
 
@@ -28,6 +28,18 @@ namespace FiniteStateMachine
         public override string ToString()
         {
             return this.ID.ToString();
+        }
+
+        public int CompareTo(AState<T> other)
+        {
+            if (this.ID == other.ID)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

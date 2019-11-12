@@ -43,12 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FiniteStateMachine\ChangeStateFunction\Sigma.cs" />
+    <Compile Include="FiniteStateMachine\Machine\AStateTransducer.cs" />
     <Compile Include="FiniteStateMachine\Machine\IActionStateMachine.cs" />
     <Compile Include="FiniteStateMachine\Machine\IFunctionStateMachine.cs" />
-    <Compile Include="FiniteStateMachine\Machine\StateMachine.cs" />
+    <Compile Include="FiniteStateMachine\Machine\AStateMachine.cs" />
     <Compile Include="FiniteStateMachine\State\BasicState.cs" />
     <Compile Include="FiniteStateMachine\State\FinalState.cs" />
-    <Compile Include="FiniteStateMachine\State\IFinalState.cs" />
+    <Compile Include="FiniteStateMachine\State\AFinalState.cs" />
     <Compile Include="FiniteStateMachine\State\AState.cs" />
     <Compile Include="FiniteStateMachine\State\IState.cs" />
     <Compile Include="Program.cs" />
@@ -57,9 +58,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FiniteStateMachine\FiniteInputStates\" />
-    <Folder Include="FiniteStateMachine\FiniteInputSymbols\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

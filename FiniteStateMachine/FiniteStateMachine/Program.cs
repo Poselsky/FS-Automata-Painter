@@ -29,7 +29,7 @@ namespace MainProgram
             {
                 table.Add(el.ID,new Dictionary<int, AState<int>>());
             });
-
+            /*
             table[state.ID].Add(0, state);
             table[state.ID].Add(1, state2);
 
@@ -38,35 +38,39 @@ namespace MainProgram
 
             table[final.ID].Add(0, state);
             table[final.ID].Add(1, null);
-
+            */
             //TWO Different ways how to write change to other state table
-            /*
+            //Sigma<int> sigma = new Sigma<int>(table);
+            
             Sigma<int> sigma = new Sigma<int>();
+            
             sigma.AddFunctionToTable(state.ID, 0, state)
                 .AddFunctionToTable(state.ID, 1, state2)
                 .AddFunctionToTable(state2.ID, 0, state)
                 .AddFunctionToTable(state2.ID, 1, final)
                 .AddFunctionToTable(final.ID, 0, state)
                 .AddFunctionToTable(final.ID, 1, null);
-            */
-            Sigma<int> sigma = new Sigma<int>(table);
             
+
+
+
             List<int> inputs = new List<int>() { 0, 1, 1, 0, 1, 1, 1, 1, 1, 1};
 
 
-            int sum = 0;
+            List<bool> coded = new List<bool>();
 
             Machine stateMachine = new Machine(allStates,inputs, sigma, state, new List<FinalState<int>>() { final } );
+            int rand = 0;
 
             for(int i= 0; i< inputs.Count; i++)
             {
                 stateMachine.DoAction(new Action<int>(el =>
                 {
-                    sum += el;
+                    coded.Add(el != 0);
                 }));
             }
 
-            Console.WriteLine(sum);
+            coded.ForEach(el => Console.WriteLine(el));
 
         }
     }
@@ -89,7 +93,7 @@ namespace MainProgram
 
         public void DoAction(Action<int[]> functions)
         {
-
+            throw new NotImplementedException();
         }
 
         public void DoAction(Action<int> functions)
