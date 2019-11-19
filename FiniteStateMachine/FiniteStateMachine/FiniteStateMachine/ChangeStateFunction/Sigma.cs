@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FiniteStateMachine
 {
-    class Sigma<T>
+    public class Sigma<T>
     {
         public Dictionary<int, Dictionary<T, AState<T>>> changeToOtherStateTable { get; private set;}
 

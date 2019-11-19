@@ -75,19 +75,14 @@ namespace MainProgram
         }
     }
 
-    class Machine : AStateMachine<int>, IActionStateMachine<int>
+    public class Machine : AStateMachine<int>, IActionStateMachine<int>
     {
         private int innerIndexPointerOfInputs;
-        private AState<int> currentState;
-        //public int Output { get; private set; }
-
 
         public Machine(List<AState<int>> allStates, List<int> finiteInputSymbols, Sigma<int> changeStateFunction, AState<int> startState, List<FinalState<int>> finalStates)
             : base(allStates, finiteInputSymbols, changeStateFunction, startState, finalStates)
         {
             this.innerIndexPointerOfInputs = 0;
-
-            currentState = startState;
             //Output = 0;
         }
 
@@ -98,13 +93,15 @@ namespace MainProgram
 
         public void DoAction(Action<int> functions)
         {
+            List<int> finiteInputSymbols = (List<int>)orderedList[1];
+
             //Null means that it's the end of states
-            if (innerIndexPointerOfInputs == ((List<int>)orderedList[1]).Count - 1 || currentState == null)
+            if (innerIndexPointerOfInputs == finiteInputSymbols.Count - 1 || currentState == null)
             {
                 return;
             }else
             {
-                int symbol = ((List<int>)orderedList[1])[innerIndexPointerOfInputs];
+                int symbol = finiteInputSymbols[innerIndexPointerOfInputs];
                 functions(symbol);
                 //Output += symbol;
              

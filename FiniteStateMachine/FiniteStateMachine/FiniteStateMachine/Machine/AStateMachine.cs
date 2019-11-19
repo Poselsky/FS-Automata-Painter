@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace FiniteStateMachine
 {
-    abstract class AStateMachine<T>
+    abstract public class AStateMachine<T>
     {
         //definition says : ordered 5 objects
         protected List<object> orderedList = new List<object>();
+        protected AState<T> currentState { get; set; }
 
         public AStateMachine(List<AState<T>> allStates, List<T> finiteInputSymbols, Sigma<T> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
         {
@@ -18,6 +19,8 @@ namespace FiniteStateMachine
             orderedList.Add(changeStateFunction);
             orderedList.Add(startState);
             orderedList.Add(finalStates);
+
+            currentState = startState;
         }
 
     }
