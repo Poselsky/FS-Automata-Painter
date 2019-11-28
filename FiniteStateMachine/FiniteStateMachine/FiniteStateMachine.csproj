@@ -52,6 +52,9 @@
     <Compile Include="FiniteStateMachine\State\AFinalState.cs" />
     <Compile Include="FiniteStateMachine\State\AState.cs" />
     <Compile Include="FiniteStateMachine\State\IState.cs" />
+    <Compile Include="GameOfLife\Cell.cs" />
+    <Compile Include="GameOfLife\World.cs" />
+    <Compile Include="GameOfLife\GridOfCells.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,23 +8,29 @@ namespace FiniteStateMachine
 {
     abstract public class AStateTransducer<T>
     {
-        //definition says : ordered 6 objects
-        protected List<object> orderedList { get; set; } = new List<object>();
+        //definition says : ordered 6 objects -- again, makes life harder
+        //protected List<object> orderedList { get; set; } = new List<object>();
 
-        public IList<T> OutputAlphabet { get => (IList<T>)orderedList[2]; }
+        List<AState<T>> allStates;
+        List<T> finiteInputSymbols;
+        public IList<T> outputAlphabet { get; private set; }
+        Sigma<T> changeStateFunction;
+        AState<T> startState;
+        List<FinalState<T>> finalStates;
 
-        public T this[int i] => OutputAlphabet[i];
+
+        public T this[int i] => outputAlphabet[i];
 
         public AStateTransducer(List<AState<T>> allStates, List<T> finiteInputSymbols ,IList<T> outputAlphabet, Sigma<T> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
         {
-            orderedList.Add(allStates);
-            orderedList.Add(finiteInputSymbols);
+            this.allStates = allStates;
+            this.finiteInputSymbols = finiteInputSymbols;
+            this.changeStateFunction = changeStateFunction;
+            this.startState = startState;
+            this.finalStates = finalStates;
 
-            orderedList.Add(outputAlphabet);
+            this.outputAlphabet = outputAlphabet;
             
-            orderedList.Add(changeStateFunction);
-            orderedList.Add(startState);
-            orderedList.Add(finalStates);
         }
     }
 }
