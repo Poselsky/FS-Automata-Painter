@@ -11,11 +11,11 @@ namespace FiniteStateMachine
         //definition says : ordered 5 objects - but in programming makes life harder
         //protected List<object> orderedList = new List<object>();
 
-        List<AState<T>> allStates;
-        List<T> finiteInputSymbols;
-        Sigma<T> changeStateFunction;
-        AState<T> startState;
-        List<FinalState<T>> finalStates;
+        protected List<AState<T>> allStates;
+        protected List<T> finiteInputSymbols;
+        protected Sigma<T> changeStateFunction;
+        protected AState<T> startState;
+        protected List<FinalState<T>> finalStates;
         protected AState<T> currentState { get; set; }
 
         public AStateMachine(List<AState<T>> allStates, List<T> finiteInputSymbols, Sigma<T> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
@@ -28,6 +28,5 @@ namespace FiniteStateMachine
 
             currentState = startState;
         }
-
     }
 }

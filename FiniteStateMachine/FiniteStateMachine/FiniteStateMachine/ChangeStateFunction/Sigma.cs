@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FiniteStateMachine
 {
-    public class Sigma<T>
+    public sealed class Sigma<T>
     {
         public Dictionary<int, Dictionary<T, AState<T>>> changeToOtherStateTable { get; private set;}
 
@@ -21,15 +21,20 @@ namespace FiniteStateMachine
             this.changeToOtherStateTable = new Dictionary<int, Dictionary<T, AState<T>>>();
         }
 
-        public AState<T> ChangeStateFunction(int stateID, T input)
+        public AState<T> ChangeStateFunction(AState<T> state, T input)
         {
-            if (ContainsKeys(stateID, input))
+            if (ContainsKeys(state.ID, input))
             {
-                return changeToOtherStateTable[stateID][input];
+                return changeToOtherStateTable[state.ID][input];
             }else
             {
                 throw new Exception("Your function is not listed in Function Table!");
             }
+        }
+
+        public AState<T> this[AState<T> state, T input]
+        {
+            get => ChangeStateFunction(state, input);
         }
         
         public Sigma<T> AddFunctionToTable(int stateID, Dictionary<T, AState<T>> dictionaryOfStates)

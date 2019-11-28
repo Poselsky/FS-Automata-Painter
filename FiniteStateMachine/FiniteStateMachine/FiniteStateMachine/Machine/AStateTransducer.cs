@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace FiniteStateMachine
 {
-    abstract public class AStateTransducer<T>
+    abstract public class AStateTransducer<T,V>
     {
         //definition says : ordered 6 objects -- again, makes life harder
         //protected List<object> orderedList { get; set; } = new List<object>();
 
-        List<AState<T>> allStates;
-        List<T> finiteInputSymbols;
+        protected List<AState<T>> allStates;
+        protected List<T> finiteInputSymbols;
         public IList<T> outputAlphabet { get; private set; }
-        Sigma<T> changeStateFunction;
-        AState<T> startState;
-        List<FinalState<T>> finalStates;
-
+        protected Sigma<V> changeStateFunction;
+        protected AState<T> startState;
+        protected List<FinalState<T>> finalStates;
+        
 
         public T this[int i] => outputAlphabet[i];
 
-        public AStateTransducer(List<AState<T>> allStates, List<T> finiteInputSymbols ,IList<T> outputAlphabet, Sigma<T> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
+        public AStateTransducer(List<AState<T>> allStates, List<T> finiteInputSymbols ,IList<T> outputAlphabet, Sigma<V> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
         {
             this.allStates = allStates;
             this.finiteInputSymbols = finiteInputSymbols;

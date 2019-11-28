@@ -9,18 +9,25 @@ namespace FiniteStateMachine.GameOfLife
     class GridOfCells
     {
         Cell[,] cells;
-        int width;
-        int height;
+        //So we can better work with it
+        public List<Cell> cellsInRow { get; private set; }
+        public int width { get; private set; }
+        public int height { get; private set; }
 
         public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY)
         {
             this.width = numberOfCellsOnX -1;
             this.height = numberOfCellsOnY - 1;
+            cellsInRow = new List<Cell>();
 
             cells = new Cell[numberOfCellsOnX, numberOfCellsOnY];
             for (int i = 0; i < numberOfCellsOnX; i++)
                 for (int j = 0; j < numberOfCellsOnX; j++)
-                    cells[i, j] = new Cell();
+                {
+                    Cell temp = new Cell();
+                    cells[i, j] = temp;
+                    cellsInRow.Add(temp);
+                }
         }
 
         private int[] NumberOfNeighbours(int i, int j)
@@ -28,25 +35,13 @@ namespace FiniteStateMachine.GameOfLife
             int alive = 0;
             int dead = 0;
             if (width > 0 && height > 0)
-            {
                 for (int x = Math.Max(0, i - 1); x <= Math.Min(i + 1, width); x++)
-                {
                     for (int y = Math.Max(0, j - 1); y <= Math.Min(j + 1, height); y++)
-                    {
                         if (x != i || y != j)
-                        {
                             if (cells[x, y].alive)
-                            {
                                 alive++;
-                            }
                             else
-                            {
                                 dead++;
-                            }
-                        }
-                    }
-                }
-            }
 
             return new int[] { alive, dead };
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,30 +10,52 @@ using FiniteStateMachine;
 namespace FiniteStateMachine.GameOfLife
 {
     //Basicaly game logic
-    class World : AStateMachine<Cell>, IActionStateMachine<Cell>
+    class World : AStateTransducer<Cell,Cell>
     {
-        GridOfCells cells;
+        GridOfCells pastState;
+        GridOfCells nowState;
+        public int width { get; set; } = 0;
+        public int height { get; set; } = 0;
 
-        public World(List<AState<Cell>> allStates, List<Cell> finiteInputSymbols, Sigma<Cell> changeStateFunction, AState<Cell> startState, List<FinalState<Cell>> finalStates) 
-            : base(allStates, finiteInputSymbols, changeStateFunction, startState, finalStates)
+        //FinalStates - > null , what's the final state in this context anyways?
+        public World(int x, int y,List<AState<Cell>> allStates, List<Cell> finiteInputSymbols, List<Cell> outputAlphabet, Sigma<Cell> changeStateFunction, AState<Cell> startState) 
+            : base(allStates, finiteInputSymbols,outputAlphabet, changeStateFunction, startState, null)
         {
-            cells = new GridOfCells(4, 4);
-
+            nowState = new GridOfCells(x, y);
+            pastState = new GridOfCells(x, y);
         }
 
-        public void DoAction(Action<Cell[]> functions)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DoAction(Action<Cell> functions)
+        public Bitmap NextFrame(string stayAliveRule, string reviveRule)
         {
-            throw new NotImplementedException();
-        }
+            int[] stayAlive = Array.ConvertAll(stayAliveRule.Split(), int.Parse);
+            int[] revive = Array.ConvertAll(reviveRule.Split(), int.Parse);
 
-        public void DoAction(Action<List<Cell>> functions)
-        {
-            throw new NotImplementedException();
+            Array.Sort(stayAlive);
+            Array.Sort(revive);
+
+            if (width > 0 && height > 0)
+            {
+                Bitmap cellsToMap = new Bitmap(width, height);
+                
+                nowState.cellsInRow.ForEach((cell) =>
+                {
+                    AState<Cell> someCell = startState;
+
+                    cell = (Cell)changeStateFunction.ChangeStateFunction(someCell, cell);
+                });
+                
+
+                //Console.WriteLine(((Cell)startState).alive);
+
+                return null;
+
+            }
+            else
+            {
+                throw new InvalidOperationException("Width and height is not SET!");
+            }
+
         }
     }
 }
