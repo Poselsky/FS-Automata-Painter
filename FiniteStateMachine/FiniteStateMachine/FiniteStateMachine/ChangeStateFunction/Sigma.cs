@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace FiniteStateMachine
 {
-    public sealed class Sigma<T,V>
+    public sealed class Sigma<Tin, Tout>
     {
-        public Dictionary<int, Dictionary<V, AState<T>>> changeToOtherStateTable { get; private set;}
+        public Dictionary<int, Dictionary<Tin, AState<Tout>>> changeToOtherStateTable { get; private set;}
 
-        public Sigma(Dictionary<int, Dictionary<V, AState<T>>> changeToOtherStateTable)
+        public Sigma(Dictionary<int, Dictionary<Tin, AState<Tout>>> changeToOtherStateTable)
         {
             this.changeToOtherStateTable = changeToOtherStateTable;
         }
 
         public Sigma()
         {
-            this.changeToOtherStateTable = new Dictionary<int, Dictionary<V, AState<T>>>();
+            this.changeToOtherStateTable = new Dictionary<int, Dictionary<Tin, AState<Tout>>>();
         }
 
-        public AState<T> ChangeStateFunction(AState<T> state, V input)
+        public AState<Tout> ChangeStateFunction(AState<Tout> state, Tin input)
         {
             if (ContainsKeys(state.ID, input))
             {
@@ -32,18 +29,18 @@ namespace FiniteStateMachine
             }
         }
 
-        public AState<T> this[AState<T> state, V input]
+        public AState<Tout> this[AState<Tout> state, Tin input]
         {
             get => ChangeStateFunction(state, input);
         }
         
-        public Sigma<T,V> AddFunctionToTable(int stateID, Dictionary<V, AState<T>> dictionaryOfStates)
+        public Sigma<Tin, Tout> AddFunctionToTable(int stateID, Dictionary<Tin, AState<Tout>> dictionaryOfStates)
         {
             this.changeToOtherStateTable[stateID] = dictionaryOfStates;
             return this;
         }
 
-        public Sigma<T,V> AddFunctionToTable(int stateID, V input, AState<T> destinationState)
+        public Sigma<Tin, Tout> AddFunctionToTable(int stateID, Tin input, AState<Tout> destinationState)
         {
             if (ContainsKeys(stateID, input))
             {
@@ -57,20 +54,20 @@ namespace FiniteStateMachine
                 }
                 else
                 {
-                    changeToOtherStateTable[stateID] = new Dictionary<V, AState<T>>();
+                    changeToOtherStateTable[stateID] = new Dictionary<Tin, AState<Tout>>();
                     changeToOtherStateTable[stateID].Add(input, destinationState);
                 }
             
             }
             return this;
         }
-        public Sigma<T,V> AddFunctionToTable(AState<T> startState, V input, AState<T> destinationState)
+        public Sigma<Tin, Tout> AddFunctionToTable(AState<Tout> startState, Tin input, AState<Tout> destinationState)
         {
             return AddFunctionToTable(startState.ID, input, destinationState);
         }
 
 
-        public Sigma<T,V> AddFunctionToTable(string stateToState, V input, AState<T> destinationState)
+        public Sigma<Tin, Tout> AddFunctionToTable(string stateToState, Tin input, AState<Tout> destinationState)
         {
             // stateID->stateID
 
@@ -90,7 +87,7 @@ namespace FiniteStateMachine
             return this;
         }
 
-        public Sigma<T,V> AddTwoWayFunctionToTable(AState<T> stateA, V input, AState<T> stateB)
+        public Sigma<Tin, Tout> AddTwoWayFunctionToTable(AState<Tout> stateA, Tin input, AState<Tout> stateB)
         {
             // stateID<->stateID -- two way
             if(stateA == stateB)
@@ -105,7 +102,7 @@ namespace FiniteStateMachine
         }
 
 
-        private bool ContainsKeys(int StateID, V input)
+        private bool ContainsKeys(int StateID, Tin input)
         {
             if (changeToOtherStateTable.ContainsKey(StateID))
             {
