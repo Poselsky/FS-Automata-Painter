@@ -80,8 +80,26 @@ namespace FiniteStateMachine.GameOfLife
             throw new ArgumentException("Cell is not in this grid");
         }
 
-        
-        
+
+        public override string ToString()
+        {
+            var s = new StringBuilder();
+
+            for (var i = 0; i < cells.GetLength(0); i++)
+            {
+                for (var j = 0; j < cells.GetLength(1); j++)
+                {
+
+                    s.Append(cells[i, j]).Append(',');
+                }
+
+                s.AppendLine();
+            }
+
+            return s.ToString();
+        }
+
+
         //Number of alive,dead neighbours
         public Tuple<int,int> this[int x, int y]
         {

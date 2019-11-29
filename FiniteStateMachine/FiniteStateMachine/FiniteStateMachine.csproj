@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="FiniteStateMachine\ChangeStateFunction\Sigma.cs" />
     <Compile Include="FiniteStateMachine\Machine\AStateTransducer.cs" />
     <Compile Include="FiniteStateMachine\Machine\IActionStateMachine.cs" />

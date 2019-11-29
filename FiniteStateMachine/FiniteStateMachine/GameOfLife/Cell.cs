@@ -25,6 +25,10 @@ namespace FiniteStateMachine.GameOfLife
             this.alive = alive;
         }
 
+        public override string ToString()
+        {
+            return alive.ToString();
+        }
         public override Cell Reaction(Func<Cell, Cell> action, Cell funcParameter)
         {
             throw new NotImplementedException();
