@@ -14,14 +14,14 @@ namespace FiniteStateMachine
         protected List<AState<T>> allStates;
         protected List<T> finiteInputSymbols;
         public IList<T> outputAlphabet { get; private set; }
-        protected Sigma<V> changeStateFunction;
+        protected Sigma<T,V> changeStateFunction;
         protected AState<T> startState;
         protected List<FinalState<T>> finalStates;
         
 
         public T this[int i] => outputAlphabet[i];
 
-        public AStateTransducer(List<AState<T>> allStates, List<T> finiteInputSymbols ,IList<T> outputAlphabet, Sigma<V> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
+        public AStateTransducer(List<AState<T>> allStates, List<T> finiteInputSymbols ,IList<T> outputAlphabet, Sigma<T,V> changeStateFunction, AState<T> startState, List<FinalState<T>> finalStates)
         {
             this.allStates = allStates;
             this.finiteInputSymbols = finiteInputSymbols;

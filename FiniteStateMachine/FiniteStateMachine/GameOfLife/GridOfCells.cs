@@ -8,29 +8,45 @@ namespace FiniteStateMachine.GameOfLife
 {
     class GridOfCells
     {
-        Cell[,] cells;
+        public Cell[,] cells { get; private set; }
         //So we can better work with it
         public List<Cell> cellsInRow { get; private set; }
         public int width { get; private set; }
         public int height { get; private set; }
 
-        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY)
+        static Random gen = new Random();
+
+        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY, Tuple<Cell,Cell> aliveDeadCell)
         {
-            this.width = numberOfCellsOnX -1;
-            this.height = numberOfCellsOnY - 1;
+            width = numberOfCellsOnX -1;
+            height = numberOfCellsOnY - 1;
             cellsInRow = new List<Cell>();
 
             cells = new Cell[numberOfCellsOnX, numberOfCellsOnY];
             for (int i = 0; i < numberOfCellsOnX; i++)
                 for (int j = 0; j < numberOfCellsOnX; j++)
                 {
-                    Cell temp = new Cell();
+                    int rand = gen.Next(0, 2);
+                    Cell temp = rand == 1 ? aliveDeadCell.Item2 : aliveDeadCell.Item1;
                     cells[i, j] = temp;
                     cellsInRow.Add(temp);
                 }
         }
 
-        private int[] NumberOfNeighbours(int i, int j)
+        public GridOfCells(List<Cell> cells,int numberOfCellsOnX, int numberOfCellsOnY)
+        {
+            if (numberOfCellsOnX + numberOfCellsOnY == cells.Count)
+            {
+                cellsInRow = cells;
+                for (int i = 0; i < numberOfCellsOnX; i++)
+                    for (int j = 0; j < numberOfCellsOnY; j++)
+                    {
+                        this.cells[i, j] = cells[i + j];
+                    }
+            }
+        }
+
+        private Tuple<int,int> NumberOfNeighbours(int i, int j)
         {
             int alive = 0;
             int dead = 0;
@@ -43,7 +59,12 @@ namespace FiniteStateMachine.GameOfLife
                             else
                                 dead++;
 
-            return new int[] { alive, dead };
+            return new Tuple<int, int>( alive, dead );
+        }
+
+        public void SetLife(bool alive,int x, int y)
+        {
+            cells[x, y].alive = alive;
         }
 
         public int[] SearchCellPosition(Cell cell)
@@ -62,13 +83,13 @@ namespace FiniteStateMachine.GameOfLife
         
         
         //Number of alive,dead neighbours
-        public int[] this[int x, int y]
+        public Tuple<int,int> this[int x, int y]
         {
             get => NumberOfNeighbours(x, y);
         }
 
         //If we don't know the position of the cell
-        public int[] this[Cell searchedCell]
+        public Tuple<int,int> this[Cell searchedCell]
         {
             get {
                 int[] position = SearchCellPosition(searchedCell);

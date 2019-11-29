@@ -20,6 +20,11 @@ namespace FiniteStateMachine.GameOfLife
             alive = determineBool == 1;
         }
 
+        public Cell(bool alive)
+        {
+            this.alive = alive;
+        }
+
         public override Cell Reaction(Func<Cell, Cell> action, Cell funcParameter)
         {
             throw new NotImplementedException();
