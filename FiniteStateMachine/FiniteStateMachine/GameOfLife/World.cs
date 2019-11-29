@@ -61,7 +61,7 @@ namespace FiniteStateMachine.GameOfLife
                 GridOfCells temp = gridOne;
                 gridOne = gridTwo;
                 gridTwo = temp;
-
+                
                 //cellsToMap.
                 
 
