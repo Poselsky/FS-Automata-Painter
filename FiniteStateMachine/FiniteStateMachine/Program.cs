@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using FiniteStateMachine;
 using FiniteStateMachine.GameOfLife;
-
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
+using System.Windows;
 
 namespace MainProgram
 {
@@ -21,6 +23,7 @@ namespace MainProgram
 
             List<AState<Cell>> states = new List<AState<Cell>>() { alive, dead };
 
+            //Changing state table
             Sigma<bool, Cell> function = new Sigma<bool, Cell>();
 
             function.AddFunctionToTable(alive, false, dead)
@@ -34,14 +37,17 @@ namespace MainProgram
 
             
             int i = 0;
-            foreach (var img in world.NextFrames("", "", 5))
+
+            GifBitmapEncoder bitmapEncoder = new GifBitmapEncoder();
+            
+
+            foreach (var img in world.NextFrames("23", "3", 10))
             {
                 img.Save(new FileStream("image"+i+".bmp", FileMode.Create,FileAccess.ReadWrite),System.Drawing.Imaging.ImageFormat.Bmp);
-                img.Dispose();
-                Console.WriteLine(i);
                 i++;
+                img.Dispose();
             }
-
+            
         }
     }
 
