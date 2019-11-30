@@ -3,7 +3,7 @@ Finite state machines are great. This repository creates API for reusability of 
 
 As it stands, right now, there's implemented Finite state transducer + automaton.
 
-_Disclaimer : Many things might not be created totally by definition, in order to keep life and programming experience simple. _
+_Disclaimer : Many things might not be created totally by definition, in order to keep life and programming experience simple._
 
 ### Supported languages:
 - C#
