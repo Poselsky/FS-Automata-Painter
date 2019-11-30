@@ -41,7 +41,7 @@ namespace MainProgram
             GifBitmapEncoder bitmapEncoder = new GifBitmapEncoder();
             
 
-            foreach (var img in world.NextFrames("23", "3", 10))
+            foreach (var img in world.NextFrames("23", "3", 2))
             {
                 img.Save(new FileStream("image"+i+".bmp", FileMode.Create,FileAccess.ReadWrite),System.Drawing.Imaging.ImageFormat.Bmp);
                 i++;
