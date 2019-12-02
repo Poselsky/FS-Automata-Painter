@@ -22,13 +22,13 @@ namespace FiniteStateMachine.GameOfLife
         int y;
 
         //FinalStates - > null , what's the final state in this context anyways?
-        public World(int x, int y,List<AState<Cell>> allStates,  Sigma<bool, Cell> changeStateFunction) 
-            : base(allStates, null, changeStateFunction, null, null)
+        public World(List<AState<Cell>> allStates,GridOfCells inputGrid,  Sigma<bool, Cell> changeStateFunction) 
+            : base(allStates, inputGrid.cellsInRow, changeStateFunction, null, null)
         {
-            this.x = x;
-            this.y = x;
-            gridTwo = new GridOfCells(this.x, this.y, new Tuple<Cell, Cell>((Cell)allStates[0], (Cell)allStates[1]), true);
-            gridOne = new GridOfCells(this.x, this.y, new Tuple<Cell, Cell>((Cell)allStates[0], (Cell)allStates[1]));
+            x = inputGrid.width + 1;
+            y = inputGrid.height + 1;
+            gridOne = inputGrid;
+            gridTwo = new GridOfCells(x, y, (Cell)allStates.First(c => ((Cell)c).alive), (Cell)(allStates).First(c => !((Cell)c).alive), true);
             
 
             /*

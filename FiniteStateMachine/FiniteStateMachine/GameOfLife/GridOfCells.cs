@@ -16,8 +16,13 @@ namespace FiniteStateMachine.GameOfLife
 
         static Random gen = new Random();
 
-        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY, Tuple<Cell,Cell> aliveDeadCell,bool blank = false)
+        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY, Cell alive, Cell dead,bool blank = false)
         {
+            if (!alive.alive || dead.alive)
+            {
+                throw new ArgumentException("Please provide valid cells.");
+            }
+
             width = numberOfCellsOnX -1;
             height = numberOfCellsOnY - 1;
             cellsInRow = new List<Cell>();
@@ -29,13 +34,13 @@ namespace FiniteStateMachine.GameOfLife
                     if (!blank)
                     {
                         int rand = gen.Next(0, 2);
-                        Cell temp = rand == 1 ? aliveDeadCell.Item2 : aliveDeadCell.Item1;
+                        Cell temp = rand == 1 ? alive : dead;
                         cells[i, j] = temp;
                         cellsInRow.Add(temp);
                     }else
                     {
-                        cells[i, j] = aliveDeadCell.Item2;
-                        cellsInRow.Add(aliveDeadCell.Item2);
+                        cells[i, j] = dead;
+                        cellsInRow.Add(dead);
                     }
                 }
         }
