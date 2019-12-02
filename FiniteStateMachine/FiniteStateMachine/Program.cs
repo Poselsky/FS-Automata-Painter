@@ -1,10 +1,6 @@
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FiniteStateMachine;
 using FiniteStateMachine.GameOfLife;
 
@@ -21,27 +17,38 @@ namespace MainProgram
 
             List<AState<Cell>> states = new List<AState<Cell>>() { alive, dead };
 
+            //Changing state table
             Sigma<bool, Cell> function = new Sigma<bool, Cell>();
 
             function.AddFunctionToTable(alive, false, dead)
-                .AddFunctionToTable(alive, true, alive)
-                .AddFunctionToTable(dead, true, alive)
-                .AddFunctionToTable(dead, false, dead);
+                    .AddFunctionToTable(alive, true, alive)
+                    .AddFunctionToTable(dead, true, alive)
+                    .AddFunctionToTable(dead, false, dead);
 
-            World world = new World(30, 30,states,function);
+
+            GridOfCells gridOne = new GridOfCells(100, 100, alive, dead);
+
+            World world = new World(states, gridOne, function);
             world.width = 600;
             world.height = 600;
 
             
             int i = 0;
-            foreach (var img in world.NextFrames("", "", 5))
+
+
+            if (!Directory.Exists("images"))
             {
-                img.Save(new FileStream("image"+i+".bmp", FileMode.Create,FileAccess.ReadWrite),System.Drawing.Imaging.ImageFormat.Bmp);
-                img.Dispose();
-                Console.WriteLine(i);
-                i++;
+                Directory.CreateDirectory("images");
             }
 
+            foreach (var img in world.NextFrames("23", "3", 100))
+            {
+                img.Save(new FileStream("images/image"+i+".jpg", FileMode.Create,FileAccess.ReadWrite),System.Drawing.Imaging.ImageFormat.Jpeg);
+                i++;
+                Console.WriteLine(i);
+                img.Dispose();
+            }
+            
         }
     }
 

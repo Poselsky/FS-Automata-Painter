@@ -11,6 +11,7 @@ namespace FiniteStateMachine.GameOfLife
         private static Random rand = new Random();
         public bool alive { get; set; }
 
+
         //when creating cell, we randomize the world, if cell is alive or not
         public Cell() : base()
         {

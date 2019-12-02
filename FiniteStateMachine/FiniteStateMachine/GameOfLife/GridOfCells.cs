@@ -16,8 +16,13 @@ namespace FiniteStateMachine.GameOfLife
 
         static Random gen = new Random();
 
-        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY, Tuple<Cell,Cell> aliveDeadCell)
+        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY, Cell alive, Cell dead,bool blank = false)
         {
+            if (!alive.alive || dead.alive)
+            {
+                throw new ArgumentException("Please provide valid cells.");
+            }
+
             width = numberOfCellsOnX -1;
             height = numberOfCellsOnY - 1;
             cellsInRow = new List<Cell>();
@@ -26,12 +31,37 @@ namespace FiniteStateMachine.GameOfLife
             for (int i = 0; i < numberOfCellsOnX; i++)
                 for (int j = 0; j < numberOfCellsOnX; j++)
                 {
+                    if (!blank)
+                    {
+                        int rand = gen.Next(0, 2);
+                        Cell temp = rand == 1 ? alive : dead;
+                        cells[i, j] = temp;
+                        cellsInRow.Add(temp);
+                    }else
+                    {
+                        cells[i, j] = dead;
+                        cellsInRow.Add(dead);
+                    }
+                }
+        }
+
+        public GridOfCells(int numberOfCellsOnX, int numberOfCellsOnY)
+        {
+            width = numberOfCellsOnX - 1;
+            height = numberOfCellsOnY - 1;
+            cellsInRow = new List<Cell>();
+
+            cells = new Cell[numberOfCellsOnX, numberOfCellsOnY];
+            for (int i = 0; i < numberOfCellsOnX; i++)
+                for (int j = 0; j < numberOfCellsOnX; j++)
+                {
                     int rand = gen.Next(0, 2);
-                    Cell temp = rand == 1 ? aliveDeadCell.Item2 : aliveDeadCell.Item1;
+                    Cell temp = rand == 1 ? new Cell(true) : new Cell(false);
                     cells[i, j] = temp;
                     cellsInRow.Add(temp);
                 }
         }
+
 
         public GridOfCells(List<Cell> cells,int numberOfCellsOnX, int numberOfCellsOnY)
         {
@@ -54,7 +84,7 @@ namespace FiniteStateMachine.GameOfLife
                 for (int x = Math.Max(0, i - 1); x <= Math.Min(i + 1, width); x++)
                     for (int y = Math.Max(0, j - 1); y <= Math.Min(j + 1, height); y++)
                         if (x != i || y != j)
-                            if (cells[x, y].alive)
+                            if (cells[y, x].alive)
                                 alive++;
                             else
                                 dead++;
@@ -62,10 +92,6 @@ namespace FiniteStateMachine.GameOfLife
             return new Tuple<int, int>( alive, dead );
         }
 
-        public void SetLife(bool alive,int x, int y)
-        {
-            cells[x, y].alive = alive;
-        }
 
         public int[] SearchCellPosition(Cell cell)
         {
@@ -90,10 +116,11 @@ namespace FiniteStateMachine.GameOfLife
                 for (var j = 0; j < cells.GetLength(1); j++)
                 {
 
-                    s.Append(cells[i, j]).Append(',');
+                    //s.Append(cells[i, j].alive == true ? 1 : 0).Append('|');
+                    s.Append(NumberOfNeighbours(i,j).Item1).Append('|');
                 }
 
-                s.AppendLine();
+                s.Append('\n');
             }
 
             return s.ToString();
@@ -103,7 +130,7 @@ namespace FiniteStateMachine.GameOfLife
         //Number of alive,dead neighbours
         public Tuple<int,int> this[int x, int y]
         {
-            get => NumberOfNeighbours(x, y);
+            get => NumberOfNeighbours(y, x);
         }
 
         //If we don't know the position of the cell
