@@ -1,0 +1,13 @@
+﻿[*.cs]
+
+# IDE0003: Remove qualification
+dotnet_style_qualification_for_property = false:warning
+
+# IDE0003: Remove qualification
+dotnet_style_qualification_for_field = false:warning
+
+# IDE0003: Remove qualification
+dotnet_style_qualification_for_method = false:warning
+
+# IDE0003: Remove qualification
+dotnet_style_qualification_for_event = false:warning
