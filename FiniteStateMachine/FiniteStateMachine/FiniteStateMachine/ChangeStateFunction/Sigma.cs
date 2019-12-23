@@ -33,12 +33,6 @@ namespace FiniteStateMachine
         {
             get => ChangeStateFunction(state, input);
         }
-        
-        public Sigma<Tin, Tout> AddFunctionToTable(int stateID, Dictionary<Tin, AState<Tout>> dictionaryOfStates)
-        {
-            this.changeToOtherStateTable[stateID] = dictionaryOfStates;
-            return this;
-        }
 
         public Sigma<Tin, Tout> AddFunctionToTable(int stateID, Tin input, AState<Tout> destinationState)
         {

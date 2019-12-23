@@ -21,7 +21,7 @@ namespace FiniteStateMachine.GameOfLife
             alive = determineBool == 1;
         }
 
-        public Cell(bool alive)
+        public Cell(bool alive) : base()
         {
             this.alive = alive;
         }

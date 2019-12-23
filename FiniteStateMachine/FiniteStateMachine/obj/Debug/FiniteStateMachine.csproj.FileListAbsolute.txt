@@ -18,3 +18,4 @@ C:\Users\olegm\OneDrive\Plocha\Programming\Csharp\Finite-State-Automata-API\Fini
 C:\Users\olegm\OneDrive\Plocha\Programming\Csharp\Finite-State-Automata-API\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.csprojAssemblyReference.cache
 C:\Users\olegm\OneDrive\Plocha\Programming\Csharp\Finite-State-Automata-API\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.exe
 C:\Users\olegm\OneDrive\Plocha\Programming\Csharp\Finite-State-Automata-API\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.pdb
+C:\Users\olegm\OneDrive\Plocha\Programming\Csharp\Finite-State-Automata-API\FiniteStateMachine\FiniteStateMachine\obj\Debug\FiniteStateMachine.csproj.CoreCompileInputs.cache

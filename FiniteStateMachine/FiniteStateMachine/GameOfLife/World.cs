@@ -10,7 +10,7 @@ using FiniteStateMachine;
 
 namespace FiniteStateMachine.GameOfLife
 {
-    //Basicaly game logic
+    //Basically game logic
     class World : AStateMachine<Cell,bool>
     {
         GridOfCells gridOne;
