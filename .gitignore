@@ -1,4 +1,3 @@
-./.vs
-./FiniteStateMachine/.vs
-./FiniteStateMachine/FiniteStateMachine/bin
-./FiniteStateMachine/FiniteStateMachine/obj
+**/.vs
+**/bin
+**/obj

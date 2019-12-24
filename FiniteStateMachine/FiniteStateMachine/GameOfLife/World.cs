@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FiniteStateMachine;
 
 
 namespace FiniteStateMachine.GameOfLife
@@ -84,7 +80,7 @@ namespace FiniteStateMachine.GameOfLife
                                 gridTwo.cells[i, j] = (Cell)changeStateTableReversed.ChangeStateFunction(currentCell, true);
                             }
 
-                        }else if (!currentCell.alive)
+                        }else
                         {
                             if(revive.Any(num => num == neighboursInfo.Item1))
                             {
@@ -102,7 +98,7 @@ namespace FiniteStateMachine.GameOfLife
 
                 Bitmap res = MapGridToBitmap(gridOne);
 
-                GenerationSwap();
+                this.GenerationSwap();
                 
                 return res; 
             }
