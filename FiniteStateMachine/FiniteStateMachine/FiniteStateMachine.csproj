@@ -45,16 +45,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FiniteStateMachine\ChangeStateFunction\Sigma.cs" />
-    <Compile Include="FiniteStateMachine\Machine\AStateTransducer.cs" />
-    <Compile Include="FiniteStateMachine\Machine\AStateMachine.cs" />
-    <Compile Include="FiniteStateMachine\State\BasicState.cs" />
-    <Compile Include="FiniteStateMachine\State\AFinalState.cs" />
-    <Compile Include="FiniteStateMachine\State\AState.cs" />
-    <Compile Include="FiniteStateMachine\State\IState.cs" />
-    <Compile Include="GameOfLife\Cell.cs" />
-    <Compile Include="GameOfLife\World.cs" />
-    <Compile Include="GameOfLife\GridOfCells.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
